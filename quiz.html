@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6FBF73',
+                        secondary: '#FFA07A',
+                        background: '#F5F5DC',
+                        text: '#333333',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #F5F5DC;
+            color: #333333;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="bg-primary text-white py-6 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Diabetes Diagnosis Quiz</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-gray-300">Learn</a></li>
+                    <li><a href="quiz.html" class="hover:text-gray-300">Quiz</a></li>
+                    <li><a href="diagnose.html" class="hover:text-gray-300">Diagnose</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    
+
+    <section class="py-12 bg-cover bg-center relative" style="background-image: url(https://www.nuhs.edu.sg/images/nuhslibraries/content/patient-care/condition/diabetes/diabetes-main.png?sfvrsn=8eddc6fc_1);">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center text-white">
+            <h2 class="text-4xl font-bold mb-4">Diagnose A Patient</h2>
+            <p class="text-xl">AI generated test patients that you can diagnose with either type 1 diabetes, type 2 diabetes, or neither.</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <button id="generatePatient" class="w-full bg-primary text-white py-3 rounded-lg mb-8 hover:bg-opacity-90 transition">
+                    Generate Test Patient
+                </button>
+
+                <div class="space-y-4">
+                    <h2 class="text-xl font-bold mb-4">Select Diagnosis:</h2>
+                    <div class="space-y-2">
+                        <label class="block">
+                            <input type="radio" name="diagnosis" value="type1" class="mr-2">
+                            Type 1 Diabetes
+                        </label>
+                        <label class="block">
+                            <input type="radio" name="diagnosis" value="type2" class="mr-2">
+                            Type 2 Diabetes
+                        </label>
+                        <label class="block">
+                            <input type="radio" name="diagnosis" value="neither" class="mr-2">
+                            Neither
+                        </label>
+                    </div>
+                    <button id="checkAnswer" class="w-full bg-secondary text-white py-3 rounded-lg mt-4 hover:bg-opacity-90 transition">
+                        Check Answer
+                    </button>
+                </div>
+
+                <a href="index.html" class="block text-center mt-8 text-primary hover:underline">
+                    Confused? Review some information about diabetes.
+                </a>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Patient Case:</h2>
+                <div id="patientCase" class="whitespace-pre-wrap mb-6">
+                    Click "Generate Test Patient" to start...
+                </div>
+            </div>
+        </div>
+
+        <div id="resultModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+                <h3 id="resultText" class="text-xl font-bold mb-4 text-center"></h3>
+                <button id="closeModal" class="w-full bg-primary text-white py-2 rounded-lg">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from 'https://esm.run/@google/generative-ai';
+
+        const genAI = new GoogleGenerativeAI("AIzaSyDN-8zF9GGOgcVd457S5AkG01gpAUN1u88");
+        let correctAnswer = null;
+
+        async function generatePatientCase() {
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                const prompt = `Generate a SINGLE detailed patient case for diabetes diagnosis. Please return ONLY the following format without any HTML tags, markdowns, 
+                or like formatting such as ** or soemething.:
+
+                Symptoms that you use can be related to:
+- Frequent urination
+- Extreme thirst
+- Unexplained weight loss
+- Constant hunger
+- Fatigue and weakness
+- Blurry vision
+- Irritability or mood changes
+- Slow-healing cuts and wounds
+
+or
+
+- Increased thirst and frequent urination
+- Constant hunger, even after eating
+- Fatigue and drowsiness
+- Blurry vision
+- Slow-healing wounds
+- Numbness or tingling in hands and feet
+- Dark patches of skin (acanthosis nigricans)
+
+and results of the following tests
+
+Fasting Blood Sugar Test: Blood sugar level greater than or equal to 126 mg/dL after fasting indicates diabetes.
+A1C Test: Measures average blood sugar over 3 months; a result of 6.5% or more indicates diabetes.
+C-Peptide Test: Measures insulin production; low levels confirms diabetes
+
+or
+
+A1C Test: Measures average blood sugar levels over 3 months; greater than or equal to 6.5% indicates diabetes.
+Fasting Blood Sugar Test: greater than or equal to 126 mg/dL after an 8-hour fast suggests diabetes.
+Oral Glucose Tolerance Test (OGTT): Measures blood sugar before and after drinking a glucose solution; greater than or equal to 200 mg/dL after 2 hours indicates diabetes.
+
+Also please dont specifically state that the parents have a certain type of diabetes, just say that they have diabetes.
+
+                Name:
+                Age:
+                Urination frequency:
+                Thirst / Hunger:
+                Family history:
+                Skin Discloration:
+                Numbness Issues:
+                Result of A1C test or fasting blood sugar test:
+                Additional notes:
+
+                Answer: [type1/type2/neither] Please vary the answer between type1, type2, and neither.`;
+
+                const result = await model.generateContent(prompt);
+                const response = result.response.text();
+                console.log(response)
+                
+                const parts = response.split('\n');
+                const caseText = parts.filter(line => !line.toLowerCase().includes('answer:')).join('\n');
+                console.log(parts)
+                console.log(caseText)
+                
+                const answerLine = parts.find(line => line.toLowerCase().includes('answer:'));
+                if (answerLine) {
+                    if (answerLine.toLowerCase().includes('type1')) {
+                        correctAnswer = 'type1';
+                    } else if (answerLine.toLowerCase().includes('type2')) {
+                        correctAnswer = 'type2';
+                    } else if (answerLine.toLowerCase().includes('neither')) {
+                        correctAnswer = 'neither';
+                    }
+                }
+                console.log(correctAnswer)
+                console.log(answerLine)
+
+                document.getElementById('patientCase').textContent = caseText;
+                
+                document.querySelectorAll('input[name="diagnosis"]').forEach(radio => {
+                    radio.checked = false;
+                });
+        }
+
+        function showResult(isCorrect) {
+            const modal = document.getElementById('resultModal');
+            const resultText = document.getElementById('resultText');
+            
+            modal.classList.remove('hidden');
+            if (isCorrect) {
+                resultText.textContent = "Correct! Well done!";
+                resultText.className = "text-xl font-bold mb-4 text-center text-green-600";
+            } else {
+                resultText.textContent = "Incorrect. Try again!";
+                resultText.className = "text-xl font-bold mb-4 text-center text-red-600";
+            }
+        }
+
+        document.getElementById('generatePatient').addEventListener('click', generatePatientCase);
+
+        document.getElementById('checkAnswer').addEventListener('click', () => {
+            const selectedAnswer = document.querySelector('input[name="diagnosis"]:checked')?.value;
+            if (!selectedAnswer) {
+                alert("Please select a diagnosis first!");
+                return;
+            }
+            if (!correctAnswer) {
+                alert("Some sort of error! Please regenerate!");
+                return;
+            }
+            showResult(selectedAnswer === correctAnswer);
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('resultModal').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

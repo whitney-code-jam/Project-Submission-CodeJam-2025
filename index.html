@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6FBF73',
+                        secondary: '#FFA07A',
+                        background: '#F5F5DC',
+                        text: '#333333',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #F5F5DC;
+            color: #333333;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="bg-primary text-white py-6 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Learn About Diabetes</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-gray-300">Learn</a></li>
+                    <li><a href="quiz.html" class="hover:text-gray-300">Quiz</a></li>
+                    <li><a href="diagnose.html" class="hover:text-gray-300">Diagnose</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    
+
+    <section class="py-12 bg-cover bg-center relative" style="background-image: url(https://t4.ftcdn.net/jpg/03/16/98/41/360_F_316984154_1ZmJCYGRXzWzIB5D1umCRbaoKlYFd8hU.jpg);">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center text-white">
+            <h2 class="text-4xl font-bold mb-4">Learn About Diabetes</h2>
+            <p class="text-xl">Diabetes is one of the most common illnesses plaguing people around the world, particularly America. Therefore, it is important to understand the basic forms of diabetes, what causes them, how to tell if you have it, and how dangerous it can be.</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <style>
+            h2 {text-align: center;}
+        </style>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Type 1 Diabetes:</h2>
+            <div id="patientCase" class="whitespace-pre-wrap mb-6">
+What is it?
+
+Type 1 diabetes is an autoimmune disease where the immune system mistakenly attacks insulin-producing cells in the pancreas. As a result, the body produces little or no insulin, requiring daily insulin therapy for survival.
+                
+What causes it?
+
+There are three main causes for an autoimmune reaction...
+
+Autoimmune reaction: The immune system destroys insulin-producing cells, preventing the body from regulating blood sugar.                
+Genetics: A family history of Type 1 diabetes increases risk.                
+Environmental triggers: Certain viral infections can cause or contribute to the immune response that triggers Type 1 diabetes.
+                
+What are the symptoms?
+
+- Frequent urination
+- Extreme thirst
+- Unexplained weight loss
+- Constant hunger
+- Fatigue and weakness
+- Blurry vision
+- Irritability or mood changes
+- Slow-healing cuts and wounds
+
+How severe can it be?
+
+Type 1 diabetes is severe and life-threatening if untreated. Without insulin, the body cannot use glucose for energy, leading to high blood sugar levels and a dangerous condition called diabetic ketoacidosis (DKA), which can be fatal. Proper insulin therapy and blood sugar management are required for survival.
+
+What complications can it lead to if not handled properly?
+
+- Heart disease and stroke
+- Kidney failure (diabetic nephropathy)
+- Nerve damage (diabetic neuropathy)
+- Vision loss (diabetic retinopathy)
+- Poor circulation, increasing the risk of infections and amputations
+- How is it officially diagnosed?
+
+
+How do doctors officially diagnose it?
+                
+Fasting Blood Sugar Test: Blood sugar level greater than or equal to 126 mg/dL after fasting indicates diabetes.
+A1C Test: Measures average blood sugar over 3 months; a result of 6.5% or more indicates diabetes.
+C-Peptide Test: Measures insulin production; low levels confirms diabetes
+
+How can you identify it at home?
+                
+Look for early symptoms: Frequent urination, extreme thirst, weight loss, and fatigue.
+Monitor weight loss: Sudden unexplained weight loss, even with normal or increased eating, is a red flag.
+Watch for ketones: If experiencing symptoms, a ketone test strip (urine test) can detect diabetic ketoacidosis, an emergency condition.
+            </div>
+            </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Type 2 Diabetes:</h2>
+            <div id="patientCase" class="whitespace-pre-wrap mb-6">
+What is it?
+
+Type 2 diabetes is a metabolic disorder in which the body becomes resistant to insulin or does not produce enough to regulate blood sugar effectively. It develops gradually and is often linked to lifestyle factors, such as obesity and physical inactivity.
+                
+What causes it?
+
+Insulin resistance: Cells become resistant to insulin, preventing glucose from being absorbed properly.
+Insufficient insulin production: The pancreas struggles to produce enough insulin over time.
+Obesity and poor diet: Excess body fat, particularly abdominal fat, increases insulin resistance.
+Physical inactivity: A sedentary lifestyle reduces insulin sensitivity.
+Genetics: A family history of diabetes raises the likelihood of developing the condition.
+
+What are the symptoms?
+
+- Increased thirst and frequent urination
+- Constant hunger, even after eating
+- Fatigue and drowsiness
+- Blurry vision
+- Slow-healing wounds
+- Numbness or tingling in hands and feet
+- Dark patches of skin (acanthosis nigricans)
+                
+How severe can it be?
+
+Type 2 diabetes develops gradually and may go undetected for years, but if left unmanaged, it can become severe and life-threatening. Chronic high blood sugar damages blood vessels, nerves, and organs, leading to serious complications. Unlike Type 1, some cases of Type 2 diabetes can be reversed or managed through diet and lifestyle changes.
+                
+What complications can it lead to if not handled properly?
+                
+- Heart disease and high blood pressure
+- Kidney damage (nephropathy)
+- Nerve damage (neuropathy), leading to foot ulcers and possible amputations
+- Eye damage (retinopathy), increasing risk of blindness
+- Increased risk of infections and slow wound healing
+- Higher risk of Alzheimer’s disease and cognitive decline
+- How is it officially diagnosed?
+
+How do doctors officially diagnose it?
+                
+A1C Test: Measures average blood sugar levels over 3 months; greater than or equal to 6.5% indicates diabetes.
+Fasting Blood Sugar Test: greater than or equal to 126 mg/dL after an 8-hour fast suggests diabetes.
+Oral Glucose Tolerance Test (OGTT): Measures blood sugar before and after drinking a glucose solution; greater than or equal to 200 mg/dL after 2 hours indicates diabetes.
+                
+How can I identify it at home?
+
+Pay attention to symptoms: Constant thirst, frequent urination, fatigue, and slow-healing wounds.
+Check for skin changes: Darkened skin patches (acanthosis nigricans), especially around the neck or armpits, can be an early sign.
+Use a home glucose monitor: If fasting blood sugar is consistently above 126 mg/dL, consult a doctor.
+Track weight and waist size: Excess abdominal fat increases risk; men with a waist >40 inches and women with a waist >35 inches should be cautious.
+                
+            </div>
+        </div>
+    </main>
+</body>
+</html>
