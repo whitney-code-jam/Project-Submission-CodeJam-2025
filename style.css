@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Funnel Display";
+  src: url(media/FunnelDisplay.ttf);
+}
+
+body {
+    background-color: antiquewhite;
+    margin: auto;
+    width: 1000px;
+    font-family: 'Funnel Display';
+}
+
+#title {
+    text-align: center;
+    font-size: 75px;
+    font-family: Optima, sans-serif;
+    margin: 10px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: tan;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+li a:hover {
+    background-color: #C19A6B;
+}
+
+#container {
+    background-color: white;
+    text-align: center;
+    width: 900px;
+    height: 500px;
+    margin: auto; 
+    padding: 5px;
+    box-sizing: border-box;
+    justify-content: center;
+    margin-bottom: 30px;
+    overflow: scroll;
+}
+
+form {
+    text-align: left;
+    margin: auto;
+    justify-content: center;
+    display: inline-block;
+    line-height: 25px;
+}
+
+h2 {
+    font-size: 40px;
+    margin:10px;
+}

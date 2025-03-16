@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Burn 'N Earn</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">BURN 'N EARN</h1>
+  <!-- Navigation Bar -->
+<div id="navbar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="calories.html">Calories</a></li>
+    </ul>
+</div>
+
+<img src="media/running.jpg" style="display: block; margin: auto; width: 900px; height: 200px; overflow: hidden; object-fit: cover;">
+    
+<div id="container">
+   <h2>Calorie Tracker</h2>
+    <!--Getting user's input -->
+    <form>
+        <label for="food">Food Name:</label> <!-- Food name input -->
+        <input type="text" id="food"><br>
+        <label for="time">Time of Day:</label> <!-- Time of day food is eaten -->
+        <select name="time" id="time">
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+        </select><br>
+        <label for="calories">Calories:</label> <!-- Calories eaten -->
+        <input type="number" id="calories"><br>
+        <button type="button" onclick="calculate()">Add Food</button>
+    </form>
+    <!-- Where total calories and food eaten is recorded  -->
+    <p id="totalcals"></p>
+
+    <table border="1" id="foodTable" style="margin: auto; justify-content: center; display: inline-block;">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        let FoodToday = [];
+        let isTableHeadGenerated = false; // Flag to track if the table head is already generated
+
+        // Food class
+        class Food {
+            constructor(name, category, calories) {
+                this.name = name;
+                this.category = category;
+                this.calories = calories;
+            }
+        }
+
+        function generateTableHead(table, data) {
+            let thead = table.createTHead();
+            let row = thead.insertRow();
+            for (let key of data) {
+                let th = document.createElement("th");
+                let text = document.createTextNode(key);
+                th.appendChild(text);
+                row.appendChild(th);
+            }
+        }
+
+        function generateTable(table, data) {
+            let tbody = table.querySelector("tbody");
+            tbody.innerHTML = ""; // Clear previous rows
+
+            for (let element of data) {
+                let row = tbody.insertRow();
+                for (let key in element) {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(element[key]);
+                    cell.appendChild(text);
+                }
+            }
+        }
+
+        function calculate() {
+            let foodname = document.getElementById("food").value;
+            let timeOfDay = document.getElementById("time").value;
+            let calories = parseInt(document.getElementById("calories").value);
+
+            // Creating a new food object and adding it to the list
+            let newFood = new Food(foodname, timeOfDay, calories);
+            FoodToday.push(newFood);
+
+            // Generate the table head only once
+            let table = document.getElementById("foodTable");
+            if (!isTableHeadGenerated) {
+                let data = Object.keys(newFood);
+                generateTableHead(table, data);
+                isTableHeadGenerated = true;
+            }
+
+            // Update the table with the new data
+            generateTable(table, FoodToday);
+
+            // Total summary of number of calories
+            const sumCalories = FoodToday.reduce((acc, curr) => acc + curr.calories, 0);
+            document.getElementById("totalcals").innerHTML = "Total Calories: " + sumCalories;
+
+            // Log to the console for debugging
+            console.table(FoodToday);
+        }
+    </script>   
+    
+</div>
+
+</body>
+</html>
