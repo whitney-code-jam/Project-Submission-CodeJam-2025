@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Burn 'N Earn</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">BURN 'N EARN</h1>
+<div id="navbar"> <!-- Navigation Bar -->
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="calories.html">Calories</a></li>
+    </ul>
+</div>
+
+<img src="media/running.jpg" style="display: block; margin: auto; width: 900px; height: 200px; overflow: hidden; object-fit: cover;">
+    
+<div id="container">
+   <h2>Welcome to Burn 'N Earn!</h2>
+   <p>Hello! Let's get started on your burning journey.</p>
+  <!-- Form for user input -->
+   <form>
+       <label for="age">Age: </label><br> <!-- Age input -->
+       <input type="number" id="age" name="age"><br>
+       <label for="gender">Gender: </label><br> <!-- Gender selection -->
+       <select name="gender" id="gender">
+           <option value="none" selected disabled hidden>Select an Option</option>
+           <option value="male">Male</option>
+           <option value="female">Female</option>
+       </select><br>
+       <label for="weight">Weight in kilograms: </label><br> <!-- Weight input -->
+       <input type="number" id="weight" name="weight"><br>
+       <label for="height">Height in centimeters: </label><br> <!-- Height input -->
+       <input type="number" id="height" name="height"><br>
+       <label for="exercise">How much do you exercise regularly? </label><br> <!-- Exercise frequency -->
+       <select name="exercise" id="exercise">
+           <option value="none" selected disabled hidden>Select an Option</option>
+           <option value="often">Often</option>
+           <option value="sometimes">Sometimes</option>
+           <option value="never">Never</option>
+       </select><br>
+       <button type="button" onclick="calculate()">Submit</button>
+    </form>
+    
+    <p id="result"></p>
+    <script>
+        function calculate() {
+            // Get variables from form
+            const age = document.getElementById("age").value;
+            let genderdropdown = document.getElementById("gender");
+            let genderValue = genderdropdown.value;
+            const weight = document.getElementById("weight").value;
+            const height = document.getElementById("height").value;
+            let FreqExercise = document.getElementById("exercise").value;
+            var BMR;
+            var AMR;
+            
+            // Calculate BMR
+            if (genderValue === "female") {
+                BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+                BMR = Math.round(BMR, 2);
+            } else {
+                BMR = 66.47 + (13.75 * weight) + (5.003 * height) - (5.003 * age);
+                BMR = Math.round(BMR, 2);
+            }
+            
+            // Calculate AMR
+            if (FreqExercise === "never") {
+                AMR = BMR * 1.2;
+            } else if (FreqExercise === "sometimes") {
+                AMR = BMR * 1.55;
+            } else {
+                AMR = BMR * 1.725;
+            }
+            document.getElementById("result").innerHTML = "You get " + BMR.toString() + " KCals per day doing nothing. With your current exercise level, you need to eat " + AMR.toString() + " KCals per day.";
+        }
+    </script>
+    
+</div>
+
+</body>
+</html>
