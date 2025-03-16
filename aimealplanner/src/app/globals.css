@@ -1,0 +1,67 @@
+
+
+
+
+@import "tailwindcss";
+:root {
+  --background: #ededed;
+  --foreground: #151515;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #151515;
+    --foreground: #ededed;
+  }
+}
+@font-face {
+  font-family: 'myFont2';
+  src: url(JetBrainsMono-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: 'myFont';
+  src:url(NotoSans-VariableFont_wdth\,wght.ttf);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  text-align:center;
+  padding-left: 10px;
+
+}
+
+h1 {
+  font-family: 'myFont', monospace;
+  font-size: 50px;
+  color: #ededed;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+input {
+  margin-right: 10px;
+  border: 2px solid white;
+  border-radius: 4px;
+  text-indent: 5px;
+}
+button {
+  background-color: #ff6347;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 50px gold;
+}
+.button:active {
+  top: 2px;
+  left: 1px;
+  box-shadow: none;
+
+}
