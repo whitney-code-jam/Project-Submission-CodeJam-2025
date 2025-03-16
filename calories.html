@@ -38,7 +38,7 @@
         <input type="number" id="calories"><br>
         <button type="button" onclick="calculate()">Add Food</button>
     </form>
-    <!-- Where total calories, whether user's goal is met, and  -->
+    <!-- Where total calories and food eaten is recorded  -->
     <p id="totalcals"></p>
 
     <table border="1" id="foodTable" style="margin: auto; justify-content: center; display: inline-block;">
@@ -106,12 +106,6 @@
             // Total summary of number of calories
             const sumCalories = FoodToday.reduce((acc, curr) => acc + curr.calories, 0);
             document.getElementById("totalcals").innerHTML = "Total Calories: " + sumCalories;
-
-            if (sumCalories >= 2000) {
-                document.getElementById("goalmet").innerHTML = "Congratulations on meeting your calorie goal today!";
-            } else {
-                document.getElementById("goalmet").innerHTML = "Keep on going! You can reach your goal!";
-            }
 
             // Log to the console for debugging
             console.table(FoodToday);
